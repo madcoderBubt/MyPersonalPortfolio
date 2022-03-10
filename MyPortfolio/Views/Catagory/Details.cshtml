@@ -1,0 +1,27 @@
+﻿@model MyPortfolio.Models.CatagoryModel
+
+@{
+    ViewBag.Title = "Details";
+    //Layout = "~/Views/Shared/_LayoutResume.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CatagoryModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Catagory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Catagory)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

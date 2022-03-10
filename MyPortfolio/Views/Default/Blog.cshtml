@@ -1,0 +1,77 @@
+﻿@model IEnumerable<MyPortfolio.Models.PostModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutResume.cshtml";
+}
+
+@section Meta{
+    <link href="~/Content/CSS/nivo-lightbox.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Default/default.css" rel="stylesheet" />
+    <link href="~/Content/CSS/blog.css" rel="stylesheet" />
+}
+@section JSContent{
+    @Scripts.Render("~/js/nivo-lightbox")
+    @*<script src="~/Scripts/nivo-lightbox/jquery.js"></script>
+    <script src="~/Scripts/nivo-lightbox/nivo-lightbox.min.js"></script>
+    <script src="~/Scripts/nivo-lightbox/custom.js"></script>*@
+}
+
+@foreach (var item in Model)
+{
+<article id="">
+    <section class="blog_post">
+        <header id="" class="">
+            <h2 class="blog_post_title">@item.Title</h2>
+            <p class="setting fright" id="portfolio"><a href="#" class="fa fa-gears"></a></p>
+            <label><i class="fa fa-calendar-o"></i> @item.PublishedDate.ToShortDateString()</label>,
+            <a href="/Posts/Details/@item.ID" data-lightbox-gallery="web-gallery" class="nivo-lightbox"><i class="fa fa-comment-o"></i> @item.Comments.Count Comments</a>,
+            <a href="/Catagory/Details/@item.CatagoryID" data-lightbox-Content="web-gallery" class="nivo-lightbox"><i class="fa fa-folder-open-o"></i> @item.Catagory.Catagory</a>
+            <hr>
+        </header>
+
+        <content class="blog_post_content">
+            @Html.Raw(item.BodyContent)
+        </content>
+        <footer id="portfolio">
+            <em>
+                <span class="fa fa-tags"></span>
+                @*@if(item.Tags.count == null) { <b>None</b>}*@
+                @{ int count = 1;}
+                @foreach (var tags in item.Tags.ToList())
+                {
+                    if (count < item.Tags.Count)
+                    {
+                        @:@tags.Name,
+                    }
+                    else
+                    {
+                        @:@tags.Name
+                    }
+                    count = count + 1;
+                }
+            </em><br />
+            <a href="~/Default/NewComment/@item.ID" data-lightbox-Content="web-gallery" class="nivo-lightbox"><span class="fa fa-comment"></span> Leave A Comment</a>,
+            <a href="~/" data-lightbox-Content="web-gallery" class="nivo-lightbox"><span class="fa fa-share-square"></span> Share</a>
+        </footer>
+    </section>
+    <section class="blog_post_comments">
+        <hr />
+        <h2>Comments Here!</h2>
+        @foreach (var commentItems in item.Comments.ToList())
+        {
+            
+            <hr style="border:none;background:darkseagreen"/>
+            <img src="~/Images/1.jpg" @*class="comment_userImg"*@ style="float:left;width:50px" Title="User Image"/>
+            <div class="post_comment fix">
+                <div class="fix">
+                    <h3 class="comment_title fleft"><a href="mailto: @commentItems.UserEmail"> @commentItems.UserName</a></h3>
+                    <p class="setting fright"><a href="#" class="fa fa-gear"></a></p>
+                </div>
+                <small>@commentItems.Date.ToLongDateString() at @commentItems.Date.ToShortTimeString()</small>
+                <pre>@commentItems.Content</pre>
+            </div>
+        }
+
+    </section>
+</article>
+}

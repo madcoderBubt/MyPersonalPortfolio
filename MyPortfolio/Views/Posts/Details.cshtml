@@ -1,0 +1,63 @@
+﻿
+@model MyPortfolio.Models.PostModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+@section Meta{
+    <link href="~/Content/bootstrap/bootstrap.blog.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+}
+
+
+<h2>Details</h2>
+<h4>My Blog Content</h4>
+<hr />
+<div class="col-sm-8 blog-main">
+
+    <div class="blog-post">
+        <h2 class="blog-post-title">
+            @Html.DisplayFor(model => model.Title)
+        </h2>
+        <p class="blog-post-meta">
+            @Html.DisplayFor(model => model.PublishedDate)
+            by @ViewBag.UserName<br />
+            @if (Model.IsModified)
+            {
+                <i class="fa fa-calendar"></i> @Model.ModifiedDate
+            } else { var p = "not Modified"; @p }
+            &brvbar;
+            <a href="~/Comments/"><i class="fa fa-comments-o"></i> @Model.Comments.Count Comments</a> &brvbar;
+            <a href="~/Catagory/"><i class="fa fa-folder-open-o"></i> @Model.Catagory.Catagory</a><br /><br />
+            @foreach (var item in Model.Tags.ToList())
+            {
+                @item.Name
+            }
+        </p>
+
+        @Html.Raw(Model.BodyContent)
+        <p class="" style="margin-top:10px">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div><!--Blog Main Content-->
+
+    @Html.Partial("_SideBarBlog")
+
+@*<div class="container">
+        <h1>Hello World</h1>
+
+        <blockquote class="">
+            @Model.ShortContent
+        </blockquote>
+
+        <pre>
+            <code>
+                @Model.BodyContent
+            </code>
+        </pre>
+
+    </div>*@

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MyPortfolio.Models.TagModel>
+
+<h4>All Tags</h4>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @using (Html.BeginForm("_DeleteTag", "Dashboard", new { id = item.ID }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "fa fa-edit" })
+                    <span> </span>
+                    @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "fa fa-bars" })
+                <button type="submit" style="background:none;border:none;color:red;padding:1px 2px"><span class="fa fa-close"></span></button>
+                }
+            </td>
+        </tr>
+    }
+</table>
+

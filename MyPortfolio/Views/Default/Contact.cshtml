@@ -1,0 +1,124 @@
+﻿@model MyPortfolio.Models.ContactModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutResume.cshtml";
+}
+
+@section Meta{
+    <link href="~/Content/CSS/nivo-lightbox.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Default/default.css" rel="stylesheet" />
+    <link href="~/Content/CSS/contact.css" rel="stylesheet" />
+}
+@*@section JSContent{
+    <script src="~/Scripts/tiny_mce/tiny_mce.js"></script>
+        }*@
+
+<section>
+    <h2>Send Me Message !</h2>
+    <hr>
+    <article>
+        <h1>Contact Form</h1>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="input_icon_container">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+            <div class="input_icon_container">
+                <i class="fa fa-user"></i>
+                @*<input id="name" type="text" placeholder="Name" class="form_control fleft" />*@
+                @Html.EditorFor(model => model.UserName,
+                new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "form_control fleft",
+                        @placeholder = @Html.DisplayNameFor(model => model.UserName)
+                    }
+                })
+                <em>
+                    <sup>*</sup> <!--Error Message-->
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </em>
+            </div>
+            <div class="input_icon_container">
+                <i class="fa fa-envelope"></i>
+                @*<input id="email" type="text" placeholder="Email" class="form_control fleft" />*@
+                @Html.EditorFor(model => model.Email,
+                new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "form_control fleft",
+                        @placeholder = @Html.DisplayNameFor(model => model.Email)
+                    }
+                })
+                <em>
+                    <sup>*</sup> <!--Error Message-->
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </em>
+            </div>
+            <div class="input_icon_container">
+                <i class="fa fa-phone"></i>
+                @*<input id="phone" type="text" placeholder="Phone" class="form_control fleft" />*@
+                @Html.EditorFor(model => model.Phone,
+                new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "form_control fleft",
+                        @placeholder = @Html.DisplayNameFor(model => model.Phone)
+                    }
+                })
+                <em>
+                    <sup>*</sup> <!--Error Message-->
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                </em>
+            </div>
+            <div class="input_icon_container">
+                <i class="fa fa-info-circle"></i>
+                @*<input id="name" type="text" placeholder="Subject" class="form_control fleft" />*@
+                @Html.EditorFor(model => model.Subject,
+                new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "form_control fleft",
+                        @placeholder = @Html.DisplayNameFor(model => model.Subject)
+                    }
+                })
+                <em>
+                    <sup>*</sup> <!--Error Message-->
+                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                </em>
+            </div>
+            <div class="input_icon_container">
+                <i class="fa fa-pencil-square-o"></i>
+                @*<textarea id="name" type="text" placeholder="Message" class="form_control fleft"></textarea>*@
+                @Html.EditorFor(model => model.Message,
+                new
+                {
+                    htmlAttributes = new
+                    {
+                        @class = "form_control fleft",
+                        @placeholder = @Html.DisplayNameFor(model => model.Message)
+                    }
+                })
+                <em>
+                    <sup>*</sup> <!--Error Message-->
+                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                </em>
+            </div>
+
+            <div class="">
+                <input class="button" type="submit" value="Send Message" />
+                <em>
+                    @*<input type="checkbox" /> Send a copy to email.*@
+                    @Html.CheckBox("sendMail") Send a copy to Email!
+                </em>
+            </div>
+        }
+    </article>
+</section>

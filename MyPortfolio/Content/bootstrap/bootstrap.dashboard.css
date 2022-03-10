@@ -1,0 +1,161 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.profile-img{
+    width:70px;
+}
+.profile-label{    
+    font-family: 'Monotype Corsiva';
+    font-size: 23px;
+    color: #eee;
+    line-height: .8;
+    font-weight: normal;
+}
+.form-control-hint{
+    color:gray;
+    font-style:italic;
+}
+.form-bg{
+    background: antiquewhite; 
+    /*background-color:#FAEBD7;*/
+}
+.form-control-sm .form-control{
+    height:25px !important;
+}
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    /*padding: 20px;*/
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #222222;
+    border-right: 1px solid #eee;
+    border-top: 1px solid #000;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -15px;
+  /*background-color:currentColor;*/
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  color:#fff;
+}
+.nav-sidebar > li > ul{
+    background: red;
+    padding-left:5px
+}
+.nav-sidebar >li > ul > li{
+    background-color:darkgray;
+}
+.nav-sidebar > li > ul > li >a{
+    padding-left:30px;
+}
+.nav-sidebar li{
+    background-color:#333;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.nav-sidebar li:last-child{
+    border-bottom:none;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus{
+  color: #fff;
+  background-color: #428bca;
+}
+.nav-sidebar > .active > ul > .currentPage > a,
+.nav-sidebar > .active > ul > .currentPage > a:hover,
+.nav-sidebar > .active > ul > .currentPage > a:focus{
+    color:#fff;
+    background-color:dimgray;
+}
+.nav-sidebar > li a,
+.nav-sidebar > li a:focus{
+    background:none;
+}
+.nav-sidebar > li a:hover{
+    color:#fff;
+    background-color: #428bca;
+}
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    /*
+    padding-right: 40px;
+    padding-left: 40px;
+    */
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}

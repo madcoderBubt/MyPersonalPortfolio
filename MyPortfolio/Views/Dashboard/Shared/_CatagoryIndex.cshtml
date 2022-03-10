@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MyPortfolio.Models.CatagoryModel>
+<h4>All Catagories</h4>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Catagory)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Catagory)
+                <script>
+                    
+                </script>
+            </td>
+            <td>
+                @using (Html.BeginForm("_DeleteCatagory", "Dashboard", new { id = item.ID }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "fa fa-edit" })
+                    <span> </span>
+                    @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "fa fa-bars" })
+                    <button type="submit" style="background:none;border:none;color:red;padding:1px 2px"><span class="fa fa-close"></span></button>
+                }
+            </td>
+        </tr>
+    }
+</table>
+

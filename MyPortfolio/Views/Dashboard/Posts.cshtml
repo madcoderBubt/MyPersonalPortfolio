@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MyPortfolio.Models.PostModel>
+
+@{
+    ViewBag.Title = "Blog Post Lists";
+    ViewBag.selectedPage = "Post";
+    ViewBag.selectedType = "Blog";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<a href="AddNew" class="label label-default">Add New</a>
+<h2 class="page-header">All Posts</h2>
+
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Catagory.Catagory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublishedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShortContent)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Catagory.Catagory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortContent)
+            </td>
+            <td>
+                @using (Html.BeginForm("_DeletePost", "Dashboard", new { id = item.ID }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ActionLink(" ", "EditPost", new { id = item.ID }, new { @class = "fa fa-edit" })
+                    <span> </span>
+                    @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "fa fa-bars" })
+                    <button type="submit" style="background:none;border:none;color:red;padding:1px 2px"><span class="fa fa-close"></span></button>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+

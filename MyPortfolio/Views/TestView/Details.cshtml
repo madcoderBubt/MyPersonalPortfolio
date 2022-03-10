@@ -1,0 +1,120 @@
+﻿@*@model MyPortfolio.Models.PostModel*@
+@model IEnumerable<MyPortfolio.Models.PostModel>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutResume.cshtml";
+}
+
+@*<h2>Details</h2>*@
+@section Meta{
+    
+<link href="~/Content/CSS/blog.css" rel="stylesheet" />
+    }
+
+@foreach (var item in Model)
+{
+    <article class="blog_post">
+        <section id="portfolio">
+            <header class="">
+                <h3 class="blog_post_title">@Html.DisplayFor(modelItem => item.Title)</h3>
+                <time><i class="glyphicon glyphicon-calendar"></i>@item.PublishedDate.ToLongDateString()</time>,@*@Html.DisplayFor(modelItem => item.PublishedDate.Date)*@
+                <a href="/CommentModels/" data-lightbox-gallery="web-gallery" class="nivo-lightbox-title" title="Tic Tac Toe! Designed By Me"><i class="glyphicon glyphicon-comment"></i> @item.Comments.Count Comments</a>,
+                <a href="" class=""><i class="glyphicon glyphicon-folder-open"></i> @Html.DisplayFor(modelItem => item.Catagory.Catagory)</a>
+            </header>
+            <content class="blog_post_content">
+                @*@Html.DisplayFor(modelItem => item.Content)*@
+                @Html.Raw(item.BodyContent)
+
+                @*@foreach (var tag in item.Tags.ToList())
+                {
+                    @tag.Name 
+                }*@
+            </content>
+            <footer>
+                @*<a href="" class="fa fa-comment"> Leave A Comment</a>,
+                    <a href="" class="fa fa-share-square"> Share</a>*@
+                @if (item.IsModified)
+                {
+                    <i class="glyphicon glyphicon-edit"></i>
+                    @item.ModifiedDate
+                }
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </footer>
+        </section>
+
+        <section>
+            <label>Comments</label>
+            @Html.ActionLink("New", "Create", "CommentModels", new { post = item.ID }, new { })
+            @foreach (var comment in item.Comments.ToList())
+            {
+                <header>
+                    <h3><a href=@Html.DisplayFor(modelItem => comment.UserEmail)>@Html.DisplayFor(modelItem => comment.UserName)</a></h3>
+                    <p>@Html.DisplayFor(modelItem => comment.Date)</p>
+                </header>
+                <content>
+                    @Html.DisplayFor(modelItem => comment.Content)
+                </content>
+                <footer>
+                    @Html.ActionLink("Edit", "Edit", "CommentModels", new { id = comment.ID }, new { })
+                    @Html.ActionLink("Details", "Details", "CommentModels", new { id = comment.ID }, new { })
+                    @Html.ActionLink("Delete", "Delete", "CommentModels", new { id = comment.ID }, new { })
+                </footer>
+            }
+        </section>
+    </article>
+}
+
+@*<div>
+    <h4>ContactModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

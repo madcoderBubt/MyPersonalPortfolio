@@ -1,0 +1,41 @@
+﻿@model MyPortfolio.Models.BlogCatagory
+@{
+    ViewBag.Title = "Index";
+    ViewBag.selectedPage = "Catagories";
+    ViewBag.selectedType = "Blog";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2 class="page-header">Catagories</h2>
+
+<div class="col-md-4 form-bg">
+    @*@Html.Partial("Shared/_CatagoryNew", Model.Catagory)*@
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Add New Catagory</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(model => model.Catagory.Catagory, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input_icon_container col-sm-12">
+                    @*<i class="fa fa-folder"></i>*@
+                    @Html.EditorFor(model => model.Catagory.Catagory, new { htmlAttributes = new { @class = "form-control", @placeholder = "Catagory" } })
+                    @Html.ValidationMessageFor(model => model.Catagory.Catagory, "", new { @class = "text-danger" })
+                </div>
+                <span class="form-control-hint col-sm-12">The name is how it appears on your site.</span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <input type="submit" value="Add New Catagory" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+<div class="col-md-8">
+    @Html.Partial("Shared/_CatagoryIndex", Model.Catagories) 
+</div>

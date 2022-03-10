@@ -1,0 +1,58 @@
+﻿@model MyPortfolio.Models.BlogTags
+
+@{
+    ViewBag.Title = "Blog Tag List";
+    ViewBag.selectedPage = "Tags";
+    ViewBag.selectedType = "Blog";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2 class="page-header">Catagories</h2>
+
+<div class="col-md-4 form-bg">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Add New Tag</h4>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(model => model.Tag.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input_icon_container col-sm-12">
+                    @*<i class="fa fa-folder"></i>*@
+                    @Html.EditorFor(model => model.Tag.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tag Name" } })
+                    @Html.ValidationMessageFor(model => model.Tag.Name, "", new { @class = "text-danger" })
+                </div>
+                <span class="form-control-hint col-sm-12">The name is how it appears on your site.</span>
+            </div>
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(model => model.Tag.Url, htmlAttributes: new { @class = "control-label col-md-6" ,@style = "text-align:left"})
+                <div class="input_icon_container col-sm-12">
+                    @*<i class="fa fa-folder"></i>*@
+                    @Html.EditorFor(model => model.Tag.Url, new { htmlAttributes = new { @class = "form-control", @placeholder = "Url Slug" } })
+                    @Html.ValidationMessageFor(model => model.Tag.Url, "", new { @class = "text-danger" })
+                </div>
+                <span class="form-control-hint col-sm-12">The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</span>
+            </div>
+            <div class="form-group form-group-sm">
+                @Html.LabelFor(model => model.Tag.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input_icon_container col-sm-12">
+                    @*<i class="fa fa-folder"></i>*@
+                    @Html.EditorFor(model => model.Tag.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Short Description" } })
+                    @Html.ValidationMessageFor(model => model.Tag.Description, "", new { @class = "text-danger" })
+                </div>
+                <span class="form-control-hint col-sm-12">The name is how it appears on your site.</span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <input type="submit" value="Add New Tags" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="col-md-8">
+    @Html.Partial("Shared/_TagIndex", Model.Tags)
+</div>

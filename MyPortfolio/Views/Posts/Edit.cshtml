@@ -1,0 +1,102 @@
+﻿@model MyPortfolio.Models.PostModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+@section scripts{
+}
+
+@section Meta{
+    <script src="~/Scripts/tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript" language="javascript">
+        tinyMCE.init({
+            // General options
+            mode: "textareas",
+            theme: "advanced",
+            plugins: "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,visualblocks",
+            //width: 600,
+            height: 500,
+        });
+
+    </script>
+    <style type="text/css">
+        .auto-style1 {
+            width: 500px;
+        }
+        #BodyContent_tbl{
+            width:90% !important;
+        }
+    </style>
+}
+
+<h2>Edit</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>PostModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.UserID)
+        @Html.HiddenFor(model => model.UrlSlug)
+        @Html.HiddenFor(model => model.PublishedDate)
+        @*@Html.HiddenFor(model => model.ModifiedDate)*@
+        @*@Html.HiddenFor(model => model.IsModified)*@
+
+        <div class="form-group form-inline">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.CatagoryID, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-6">
+                    @Html.DropDownList("CatagoryID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CatagoryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.ShortContent, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.ShortContent, new { htmlAttributes = new { @class = "form-control", @TextMoode= "MultiLine"} })
+                    @Html.ValidationMessageFor(model => model.ShortContent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BodyContent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BodyContent, new { htmlAttributes = new { @class = "form-control", @width = "100%", @height = "400px" } })
+                @Html.ValidationMessageFor(model => model.BodyContent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TagString, new { htmlAttributes = new { @class = "form-control" } })
+               
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
